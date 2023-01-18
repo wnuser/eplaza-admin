@@ -1,0 +1,28 @@
+{
+  "name": "eplaza-admin",
+  "version": "1.0.0",
+  "description": "eplaza admin apis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wnuser/eplaza-admin.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "express"
+  ],
+  "author": "Jitendra Kumar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wnuser/eplaza-admin/issues"
+  },
+  "homepage": "https://github.com/wnuser/eplaza-admin#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
