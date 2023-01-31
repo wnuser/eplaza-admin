@@ -7,6 +7,9 @@ const bodyParser = require('body-parser')
 const User  = require('./models/users')
 
 const app = express()
+
+const fileUpload = require('express-fileupload')
+
 require('dotenv/config')
 const api = process.env.API_URL
 
@@ -19,6 +22,7 @@ app.use(bodyParser.json())
 // User.sync({ force: true })
 
 app.use(express.json())
+app.use(fileUpload())
 
 app.use("/", apiRouts)
     

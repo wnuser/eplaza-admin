@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('api_admin', 'root', 'Rubi@123', {
+const sequelize = new Sequelize('api_admin', 'root', '', {
     host: 'localhost',
     dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
   });

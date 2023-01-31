@@ -43,6 +43,6 @@ const SubscriptionPlan = sequelize.define('subscription_plans', {
 });
 
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+// console.log(User === sequelize.models.User); // true
 
 module.exports = SubscriptionPlan;
