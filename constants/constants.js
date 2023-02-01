@@ -9,15 +9,20 @@ let constants = {
         customer: 3,
     },
 
-    category_status : {
+    category_status: {
         active: 1,
-        inactive:0
+        inactive: 0,
     },
 
     user_status: {
-        active:1,
-        inactive:2
-    }
+        active: 1,
+        inactive: 2,
+    },
+
+    subscription_status: {
+        active: 1,
+        inactive: 2,
+    },
 }
 
 module.exports = Object.freeze(constants)

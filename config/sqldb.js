@@ -1,15 +1,16 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('api_admin', 'root', 'Rubi@123', {
+const sequelize = new Sequelize('eplaza', 'root', '', {
     host: 'localhost',
-    dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
-  });
+    dialect:
+        'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
+})
 
 try {
-    sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    sequelize.authenticate()
+    console.log('Connection has been established successfully.')
+} catch (error) {
+    console.error('Unable to connect to the database:', error)
 }
 
-module.exports = sequelize;
+module.exports = sequelize

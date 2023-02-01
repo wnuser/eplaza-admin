@@ -1,10 +1,9 @@
-
-const apiRouts = require('./routes/apiRouts');
+const apiRouts = require('./routes/apiRouts')
 
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const User  = require('./models/users')
+const User = require('./models/subscriptionBilling')
 
 const app = express()
 require('dotenv/config')
@@ -20,8 +19,8 @@ app.use(bodyParser.json())
 
 app.use(express.json())
 
-app.use("/", apiRouts)
-    
+app.use('/', apiRouts)
+
 app.get(`${api}/`, (req, res) => {
     res.send('Hello !')
 })
