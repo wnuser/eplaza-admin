@@ -14,10 +14,18 @@ const getAllCategories = async (req, res) => {
         })
         .then((data) => {
             console.log(data, 'success')
-            return res.status(200).json(data)
+            return res.status(200).json({
+                data,
+                message: 'Category details',
+                success: true,
+            })
         })
         .catch((error) => {
-            return res.status(400).json(error)
+            return res.status(400).json({
+                error: error.message,
+                success: false,
+                message: 'Something went wrong',
+            })
         })
 }
 

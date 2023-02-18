@@ -89,7 +89,7 @@ const updateShopDetails = (req, res) => {
         })
         .catch((error) => {
             res.status(422).json({
-                error: error.errors,
+                error: error.message,
                 message: 'Something went wrong',
                 success: false,
             })

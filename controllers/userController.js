@@ -70,40 +70,49 @@ const otpVerification = async (req, res) => {
     const otp = data.otp
     const userId = data.user_id
 
-    const result = await userModel
-        .findAll({
-            where: {
-                id: userId,
-                register_otp: otp,
-            },
-        })
-        .then((data) => {
-            let response = {}
-            if (Object.keys(data).length === 0) {
-                response = {
-                    data,
-                    message: 'Invalid otp or user_id',
-                    success: true,
+    try {
+        const result = await userModel
+            .findAll({
+                where: {
+                    id: userId,
+                    register_otp: otp,
+                },
+            })
+            .then((data) => {
+                let response = {}
+                if (Object.keys(data).length === 0) {
+                    response = {
+                        data,
+                        message: 'Invalid otp or user_id',
+                        success: true,
+                    }
+                    return res.status(401).json(response)
+                } else {
+                    response = {
+                        data,
+                        message: 'OTP verified successfully!',
+                        success: true,
+                    }
+                    return res.status(200).json(response)
                 }
-                return res.status(401).json(response)
-            } else {
-                response = {
-                    data,
-                    message: 'OTP verified successfully!',
-                    success: true,
+            })
+            .catch((Error) => {
+                console.log(Error, 'error')
+
+                let ErrorResponse = {
+                    data: Error,
+                    message: 'Something went wrong',
+                    success: false,
+                    error: Error.message,
                 }
-                return res.status(200).json(response)
-            }
+                return res.status(400).json(ErrorResponse)
+            })
+    } catch (error) {
+        return res.status(400).json({
+            message: 'Something went wrong nn',
+            error: error.message,
         })
-        .catch((error) => {
-            letErrorResponse = {
-                data: '',
-                message: 'Something went wrong',
-                success: false,
-                error: error.errors,
-            }
-            return res.status(400).json(letErrorResponse)
-        })
+    }
 }
 
 module.exports = {
