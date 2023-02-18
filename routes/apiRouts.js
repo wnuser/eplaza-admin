@@ -1,12 +1,20 @@
 const { createUser, otpVerification } = require('../controllers/userController')
-const { getAllCategories } = require('../controllers/categoeryController')
-const { getSubCategories } = require('../controllers/subCategories')
-const { createUser, otpVerification } = require('../controllers/userController')
-const categoryController = require('../controllers/categoeryController')
-const subCategories = require('../controllers/subCategories')
+const {
+    getAllCategories,
+    createCategory,
+    updateCategory,
+    deleteCategory,
+} = require('../controllers/categoeryController')
+const {
+    getSubCategories,
+    createSubCategory,
+    updateSubCategory,
+    deleteSubCategory,
+} = require('../controllers/subCategories')
 const { allPlans } = require('../controllers/plansController')
 const { login } = require('../controllers/authController')
 const { purchaseSubscription } = require('../controllers/subscriptionBilling')
+const { updateShopDetails } = require('../controllers/shopController')
 
 const express = require('express')
 const router = express.Router()
@@ -14,26 +22,33 @@ const router = express.Router()
 // auth routes
 router.post('/login', login)
 
+router.post('/test', (req, res) => {
+    res.send('Coming here...!')
+})
+
 //user routes
 router.post('/register', createUser)
 router.post('/check/otp', otpVerification)
 
-//category routes
-router.get('/get/categories', getAllCategories)
-//category routes
-router.get('/get/categories', categoryController.getAllCategories)
-router.post('/create/category', categoryController.createCategory)
-router.patch('/update/category', categoryController.updateCategory)
-router.delete('/delete/category', categoryController.deleteCategory)
-
-//sub categories routes
-router.get('/get/subcategories/:categoryId', subCategories.getSubCategories)
-router.post('/create/sub-category', subCategories.createSubCategory)
-router.patch('/update/sub-category', subCategories.updateSubCategory)
-router.delete('/delete/sub-category', subCategories.deleteSubCategory)
-
 // subscription
 router.get('/plans', allPlans)
 router.post('/purchase/plan', purchaseSubscription)
+
+//category routes
+router.get('/get/categories', getAllCategories)
+router.post('/create/category', createCategory)
+router.patch('/update/category', updateCategory)
+router.delete('/delete/category', deleteCategory)
+
+//sub categories routes
+router.get('/get/subcategories/:categoryId', getSubCategories)
+router.post('/create/sub-category', createSubCategory)
+router.patch('/update/sub-category', updateSubCategory)
+router.delete('/delete/sub-category', deleteSubCategory)
+
+// update shop details
+router.post('/update/shop', updateShopDetails)
+
+//product crud apis for vendor
 
 module.exports = router

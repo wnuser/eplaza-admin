@@ -3,7 +3,7 @@ const apiRouts = require('./routes/apiRouts')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const User = require('./models/subscriptionBilling')
+// const User = require('./models/subscriptionBilling')
 
 const app = express()
 
@@ -13,7 +13,14 @@ require('dotenv/config')
 const api = process.env.API_URL
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(express.bodyParser({ limit: '50mb' }))
+app.use(
+    bodyParser.urlencoded({
+        parameterLimit: 100000,
+        extended: false,
+        limit: '50mb',
+    })
+)
 
 // parse application/json
 app.use(bodyParser.json())
@@ -23,7 +30,11 @@ app.use(bodyParser.json())
 app.use(express.json())
 app.use(fileUpload())
 
-app.use('/', apiRouts)
+try {
+    app.use('/', apiRouts)
+} catch (error) {
+    res.status(400).json({ message: error.message })
+}
 
 app.get(`${api}/`, (req, res) => {
     res.send('Hello !')
