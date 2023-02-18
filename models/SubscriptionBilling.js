@@ -28,13 +28,18 @@ const SubscriptionBilling = sequelize.define(
             allowNull: false,
             // allowNull defaults to true
         },
-        discount_amount: {
+        discount_price: {
             type: DataTypes.DOUBLE,
             allowNull: false,
         },
         total_billing_amount: {
             type: DataTypes.DOUBLE,
             allowNull: false,
+        },
+        duration: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            comment: 'Duration in days',
         },
     },
     {

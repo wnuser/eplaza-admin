@@ -3,7 +3,7 @@ const apiRouts = require('./routes/apiRouts')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-// const User = require('./models/subscriptionBilling')
+const User = require('./models/VendorSubscription')
 
 const app = express()
 
@@ -26,6 +26,7 @@ app.use(
 app.use(bodyParser.json())
 
 // User.sync({ force: true })
+// User.sync({ alter: true })
 
 app.use(express.json())
 app.use(fileUpload())

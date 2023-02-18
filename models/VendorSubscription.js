@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const dbConnection = require('../config/sqldb')
 const SubscriptionBilling = require('./SubscriptionBilling')
+const SubscriptionPlans = require('./SubscriptionPlans')
 
 const VendorSubscription = dbConnection.define(
     'vendor_subscriptions',
@@ -12,6 +13,10 @@ const VendorSubscription = dbConnection.define(
         plan_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: SubscriptionPlans,
+                key: 'id',
+            },
         },
         billing_id: {
             type: DataTypes.INTEGER,
@@ -29,26 +34,12 @@ const VendorSubscription = dbConnection.define(
             type: DataTypes.DATE,
             allowNull: false,
         },
-        total_billing_price: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        plan_price: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        discount_amount: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        total_billing_price: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
+
         is_plan_expired: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0,
+            comment: '0-NOT_EXPIRED,1-EXPIRED',
         },
     },
     {
@@ -57,5 +48,17 @@ const VendorSubscription = dbConnection.define(
         tableName: 'vendor_subscriptions',
     }
 )
+
+VendorSubscription.belongsTo(SubscriptionPlans, {
+    foreignKey: {
+        name: 'plan_id',
+    },
+})
+
+VendorSubscription.belongsTo(SubscriptionBilling, {
+    foreignKey: {
+        name: 'billing_id',
+    },
+})
 
 module.exports = VendorSubscription
