@@ -2,7 +2,37 @@ const SubscriptionBilling = require('../models/SubscriptionBilling')
 const SubscriptionPlans = require('../models/SubscriptionPlans')
 const VendorSubscriptionModel = require('../models/VendorSubscription')
 
-const date = require('date-and-time')
+const getSubscriptionDetails = async (req, res) => {
+    const vendorId = req.params.vendorId
+
+    const subscriptionDetails = await VendorSubscriptionModel.findAll({
+        where: {
+            vendor_id: vendorId,
+        },
+        include: [
+            {
+                model: SubscriptionPlans,
+            },
+            {
+                model: SubscriptionBilling,
+            },
+        ],
+    })
+        .then((data) => {
+            return res.status(200).json({
+                data,
+                message: 'Subscription details found',
+                success: true,
+            })
+        })
+        .catch((error) => {
+            return res.status(400).json({
+                error: error.message,
+                message: 'Something went wrong',
+                success: false,
+            })
+        })
+}
 
 const purchaseSubscription = async (req, res) => {
     const data = req.body
@@ -104,4 +134,5 @@ const purchaseSubscription = async (req, res) => {
 
 module.exports = {
     purchaseSubscription,
+    getSubscriptionDetails,
 }

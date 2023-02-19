@@ -13,7 +13,10 @@ const {
 } = require('../controllers/subCategories')
 const { allPlans } = require('../controllers/plansController')
 const { login } = require('../controllers/authController')
-const { purchaseSubscription } = require('../controllers/subscriptionBilling')
+const {
+    purchaseSubscription,
+    getSubscriptionDetails,
+} = require('../controllers/subscriptionBilling')
 const { updateShopDetails } = require('../controllers/shopController')
 
 const express = require('express')
@@ -33,6 +36,7 @@ router.post('/check/otp', otpVerification)
 // subscription
 router.get('/plans', allPlans)
 router.post('/purchase/plan', purchaseSubscription)
+router.get('/subscrioption/:vendorId', getSubscriptionDetails)
 
 //category routes
 router.get('/get/categories', getAllCategories)
