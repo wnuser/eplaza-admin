@@ -3,7 +3,7 @@ const apiRouts = require('./routes/apiRouts')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const User = require('./models/VendorSubscription')
+const User = require('./models/Products')
 
 const app = express()
 
@@ -18,12 +18,12 @@ app.use(
     bodyParser.urlencoded({
         parameterLimit: 100000,
         extended: false,
-        limit: '50mb',
+        limit: '1000mb',
     })
 )
 
 // parse application/json
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 
 // User.sync({ force: true })
 // User.sync({ alter: true })

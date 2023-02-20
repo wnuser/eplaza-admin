@@ -18,6 +18,10 @@ const {
     getSubscriptionDetails,
 } = require('../controllers/subscriptionBilling')
 const { updateShopDetails } = require('../controllers/shopController')
+const { addProduct } = require('../controllers/productController')
+const {
+    allAvailableTimes,
+} = require('../controllers/globalDeliveryTimeController')
 
 const express = require('express')
 const router = express.Router()
@@ -37,6 +41,10 @@ router.post('/check/otp', otpVerification)
 router.get('/plans', allPlans)
 router.post('/purchase/plan', purchaseSubscription)
 router.get('/subscrioption/:vendorId', getSubscriptionDetails)
+
+// products
+router.get('/all/delivery/times', allAvailableTimes)
+router.post('/add/product', addProduct)
 
 //category routes
 router.get('/get/categories', getAllCategories)

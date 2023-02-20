@@ -59,7 +59,7 @@ const createUser = async (req, res) => {
                 data: '',
                 message: 'Something went wrong!',
                 success: false,
-                error: error.errors,
+                error: error.message,
             }
             return res.status(422).json(errorResponse)
         })
