@@ -17,7 +17,10 @@ const {
     purchaseSubscription,
     getSubscriptionDetails,
 } = require('../controllers/subscriptionBilling')
-const { updateShopDetails } = require('../controllers/shopController')
+const {
+    updateShopDetails,
+    getShopDetails,
+} = require('../controllers/shopController')
 const {
     addProduct,
     productList,
@@ -72,6 +75,7 @@ router.delete('/delete/sub-category', deleteSubCategory)
 
 // update shop details
 router.post('/update/shop', updateShopDetails)
+router.get('/shop/details/:vendorId', getShopDetails)
 
 //product crud apis for vendor
 

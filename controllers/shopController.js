@@ -11,15 +11,12 @@ const updateShopDetails = (req, res) => {
     // Array of allowed files
     // const array_of_allowed_files = ['png', 'jpeg', 'jpg', 'gif']
 
-    // // Get the extension of the uploaded file
-    // const file_extension = image.originalname.slice(
-    //     ((image.originalname.lastIndexOf('.') - 1) >>> 0) + 2
-    // )
-
-    // // Check if the uploaded file is allowed
-    // if (!array_of_allowed_files.includes(file_extension)) {
-    //     throw Error('Invalid file')
-    // }
+    if (!req.files) {
+        res.status(400).json({
+            message: 'Please choose images',
+            success: false,
+        })
+    }
 
     if (!('image_1' in req.files)) {
         return res.status(422).json({
@@ -96,6 +93,34 @@ const updateShopDetails = (req, res) => {
         })
 }
 
+const getShopDetails = (req, res) => {
+    const vendorId = req.params.vendorId
+
+    // res.send(vendorId)
+
+    const shopDetails = shopDetailsModel
+        .findAll({
+            where: {
+                vendor_id: vendorId,
+            },
+        })
+        .then((data) => {
+            res.status(200).json({
+                data,
+                message: 'Shop details',
+                success: true,
+            })
+        })
+        .catch((error) => {
+            res.status(400).json({
+                error: error.message,
+                message: 'Something went wrong',
+                success: false,
+            })
+        })
+}
+
 module.exports = {
     updateShopDetails,
+    getShopDetails,
 }
