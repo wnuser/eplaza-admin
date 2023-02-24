@@ -3,6 +3,7 @@ const sequelize = require('../config/sqldb')
 const categoryModel = require('./category')
 const subCategoryModel = require('./subCategories')
 const userModel = require('./users')
+const globalDeliveryTimesModel = require('./globalDeliveryTimes')
 
 const Products = sequelize.define(
     'products',
@@ -87,6 +88,18 @@ const Products = sequelize.define(
             defaultValue: 0,
             comment: '0-NOT_ENABLED,1-ENABLED',
         },
+        image_1: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        image_2: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        image_3: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
     },
     {
         // Other model options go here
@@ -97,5 +110,22 @@ const Products = sequelize.define(
 
 // `sequelize.define` also returns the model
 // console.log(User === sequelize.models.User); // true
+Products.belongsTo(categoryModel, {
+    foreignKey: {
+        name: 'category_id',
+    },
+})
+
+Products.belongsTo(subCategoryModel, {
+    foreignKey: {
+        name: 'sub_category_id',
+    },
+})
+
+Products.belongsTo(globalDeliveryTimesModel, {
+    foreignKey: {
+        name: 'shipping_policy',
+    },
+})
 
 module.exports = Products

@@ -25,6 +25,11 @@ schema
     .not()
     .oneOf(['Passw0rd', 'Password123']) // Blacklist these values
 
+const sendOtpTest = async (req, res) => {
+    const apiUrl =
+        'http://www.smsdealnow.com/api/pushsms?user=Eplaza&authkey=92g9plxoAxdjU&sender=STEPlN&mobile=+7906748534&text=%7B%23var%23%7D+is+OTP+for+completion+of+seller+account+creation+on+Eplaza.Do+NOT+disclose+it+to+anyone.+STEPlN&output=json&entityid=1701164266201154637&templateid=1707167508503400708'
+}
+
 const createUser = async (req, res) => {
     const data = req.body
     const password = data.password
